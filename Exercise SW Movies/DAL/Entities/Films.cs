@@ -17,8 +17,8 @@ namespace Exercise_SW_Movies.DAL.Entities
         public string Producer { get; set; }
         public DateTime Release_date  { get; set; }
         public string Url { get; set; }
-        public string Created { get; set; }
-        public string Edited { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Edited { get; set; }
         public virtual ICollection<Species> Species { get; set; }
         public virtual ICollection<Vehicles> Vehicles { get; set; }
         public virtual ICollection<Planets> Planets { get; set; }
