@@ -8,5 +8,6 @@ namespace Exercise_SW_Movies.Services.Interfaces
     {
         IEnumerable<MovieListItem> GetMoviesList();
         MovieDetails GetMovieDetails(int id);
+        void AddVote (int movieId, int rate);
     }
 }
