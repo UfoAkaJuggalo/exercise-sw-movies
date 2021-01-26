@@ -32,6 +32,14 @@ namespace Exercise_SW_Movies.Controllers
 
             return PartialView(model);
         }
+        
+        [HttpPost]
+        public IActionResult AddVote(int movieId, int rate)
+        {
+            _moviesService.AddVote(movieId, rate);
+
+            return Ok();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
