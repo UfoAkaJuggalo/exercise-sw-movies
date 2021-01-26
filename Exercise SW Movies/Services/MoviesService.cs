@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 using Exercise_SW_Movies.DAL;
+using Exercise_SW_Movies.DAL.Entities;
 using Exercise_SW_Movies.Models;
 using Exercise_SW_Movies.Services.Interfaces;
 
@@ -16,6 +16,17 @@ namespace Exercise_SW_Movies.Services
         public MoviesService(SWContext context)
         {
             _context = context;
+        }
+
+        public void AddVote(int movieId, int rate)
+        {
+            _context.Rating.Add(new Rating()
+            {
+                Rate = rate,
+                Date = DateTime.Now,
+                Films = _context.Films.FirstOrDefault(x => x.Id == movieId)
+            });
+            _context.SaveChanges();
         }
 
         public MovieDetails GetMovieDetails(int id)
