@@ -1,0 +1,35 @@
+﻿@model Exercise_SW_Movies.View_Models.MovieList
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Movies)
+                    {
+                        <tr>
+                            <td>@item.EpisodeId</td>
+                            <td>@item.Title</td>
+                            <td><button type="button" class="btn btn-primary btn-sm details-btn" titleId="@item.Id">Details</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+<div id="movieDetails"></div>
+
+    <script>
+        $('.details-btn').click(function (event) {
+            const $target = $(event.target);
+            const titleid = $target.attr("titleid");
+            const url = `@Url.Action("MovieDetails", "Home")`;
+            $('#movieDetails').load(url, { id: titleid });
+
+        })
+    </script>

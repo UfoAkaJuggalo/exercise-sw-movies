@@ -1,0 +1,114 @@
+﻿@model Exercise_SW_Movies.Models.MovieDetails
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+    <dt class="col-sm-3">Episode number</dt>
+    <dd class="col-sm-9">@Model.Episode_id</dd>
+    <dt class="col-sm-3">The opening paragraphs at the beginning of this film.</dt>
+    <dd class="col-sm-9">@Model.Opening_crawl</dd>
+    <dt class="col-sm-3">Director</dt>
+    <dd class="col-sm-9">@Model.Director</dd>
+    <dt class="col-sm-3">Producer</dt>
+    <dd class="col-sm-9">@Model.Producer</dd>
+    <dt class="col-sm-3">Release date</dt>
+    <dd class="col-sm-9">@Model.Release_date.ToLongDateString()</dd>
+    <dt class="col-sm-3">Rating</dt>
+    <dd class="col-sm-9">@Model.Rating (@Model.Votes votes) <button class="btn btn-sm btn-info ml-3" id="btn-vote">Vote</button> </dd>
+    <dt class="col-sm-3">Species</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Species)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Starships</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Starships)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Vehicles</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Vehicles)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Characters</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.People)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Planets</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Planets)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Created</dt>
+    <dd class="col-sm-9">@Model.Created.ToLongDateString()</dd>
+    <dt class="col-sm-3">Edited</dt>
+    <dd class="col-sm-9">@Model.Edited.ToLongDateString()</dd>
+</dl>
+
+<!-- Modal -->
+<div class="modal fade" id="voteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Voting</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                @for (int i = 1; i < 11; i++)
+                {
+                    <span class="m-1 h1 voute-star" style="cursor: pointer" vote="@i">&#9734;</span>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="send-vote" type="button" class="btn btn-success">Vote!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var vouteRate = 0;
+
+    $('#btn-vote').click(function () {
+        $('#voteModal').modal('show');
+    });
+
+    $('.voute-star').click(function (event) {
+        const $target = $(event.target);
+        vouteRate = $target.attr("vote");
+
+        $('.voute-star').each(function (index, element) {
+            if (index < vouteRate) {
+                $(element).text("★");
+            } else {
+                $(element).text("☆");
+            }
+        })
+    });
+
+    $('#send-vote').click(function () {
+        const url = `@Url.Action("AddVote", "Home")`;
+        const url2 = `@Url.Action("MovieDetails", "Home")`;
+        const movieId = `@Model.Id`;
+        
+        $('#voteModal').modal('hide');
+
+        $.post(url, { movieId: movieId, rate: vouteRate})
+            .done(function (data) {                
+                $('#movieDetails').load(url2, { id: movieId });
+            });        
+    })
+</script>
