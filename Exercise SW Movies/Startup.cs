@@ -1,5 +1,7 @@
 
 using Exercise_SW_Movies.DAL;
+using Exercise_SW_Movies.Services;
+using Exercise_SW_Movies.Services.Interfaces;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +26,7 @@ namespace Exercise_SW_Movies
         {
             services.AddDbContext<SWContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IMoviesService, MoviesService>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
         }
