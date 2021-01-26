@@ -15,10 +15,21 @@
                         <tr>
                             <td>@item.EpisodeId</td>
                             <td>@item.Title</td>
-                            <td><button type="button" class="btn btn-primary btn-sm" titleId="@item.Id">Details</button></td>
+                            <td><button type="button" class="btn btn-primary btn-sm details-btn" titleId="@item.Id">Details</button></td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
+<div id="movieDetails"></div>
+
+    <script>
+        $('.details-btn').click(function (event) {
+            const $target = $(event.target);
+            const titleid = $target.attr("titleid");
+            const url = `@Url.Action("MovieDetails", "Home")`;
+            $('#movieDetails').load(url, { id: titleid });
+
+        })
+    </script>

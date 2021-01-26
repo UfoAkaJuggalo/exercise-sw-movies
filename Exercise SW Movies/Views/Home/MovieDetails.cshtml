@@ -1,0 +1,56 @@
+﻿@model Exercise_SW_Movies.Models.MovieDetails
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+    <dt class="col-sm-3">Episode number</dt>
+    <dd class="col-sm-9">@Model.Episode_id</dd>
+    <dt class="col-sm-3">The opening paragraphs at the beginning of this film.</dt>
+    <dd class="col-sm-9">@Model.Opening_crawl</dd>
+    <dt class="col-sm-3">Director</dt>
+    <dd class="col-sm-9">@Model.Director</dd>
+    <dt class="col-sm-3">Producer</dt>
+    <dd class="col-sm-9">@Model.Producer</dd>
+    <dt class="col-sm-3">Release date</dt>
+    <dd class="col-sm-9">@Model.Release_date.ToLongDateString()</dd>
+    <dt class="col-sm-3">Rating</dt>
+    <dd class="col-sm-9">@Model.Rating (@Model.Votes voutes)</dd>
+    <dt class="col-sm-3">Species</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Species)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Starships</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Starships)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Vehicles</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Vehicles)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Characters</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.People)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Planets</dt>
+    <dd class="col-sm-9">
+        @foreach (var item in Model.Planets)
+        {
+            <p class="m-0">@item</p>
+        }
+    </dd>
+    <dt class="col-sm-3">Created</dt>
+    <dd class="col-sm-9">@Model.Created.ToLongDateString()</dd>
+    <dt class="col-sm-3">Edited</dt>
+    <dd class="col-sm-9">@Model.Edited.ToLongDateString()</dd>
+</dl>

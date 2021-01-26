@@ -26,6 +26,13 @@ namespace Exercise_SW_Movies.Controllers
             return View(model);
         }
 
+        public IActionResult MovieDetails(int id)
+        {
+            var model = _moviesService.GetMovieDetails(id);
+
+            return PartialView(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
