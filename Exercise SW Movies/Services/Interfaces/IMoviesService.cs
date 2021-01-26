@@ -7,5 +7,6 @@ namespace Exercise_SW_Movies.Services.Interfaces
     public interface IMoviesService
     {
         IEnumerable<MovieListItem> GetMoviesList();
+        MovieDetails GetMovieDetails(int id);
     }
 }
