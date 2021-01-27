@@ -40,6 +40,25 @@ namespace Exercise_SW_Movies___Test
             Assert.NotEmpty(result);
         }
 
+        [Fact]
+        public void CheckAddNewRate()
+        {
+            // 1. Arrange
+            var movieId = 2;
+            var rate = 3;
+
+            // 2. Act 
+            var movieService = new MoviesService(_context);
+            movieService.AddVote(movieId, rate);
+            var result = movieService.GetMovieDetails(movieId);
+
+            // 3. Assert
+            Assert.NotNull(result);
+            Assert.Equal(movieId, result.Id);
+            Assert.Equal(rate, result.Rating);
+            Assert.Equal(1, result.Votes);
+        }
+
         private void InitializeDB()
         {
             _context.Database.EnsureCreated();
