@@ -27,6 +27,19 @@ namespace Exercise_SW_Movies___Test
             InitializeDB();
         }
 
+        [Fact]
+        public async void CheckIfWeHaveAnyFilms()
+        {
+            // 1. Arrange
+
+            // 2. Act 
+            var movieService = new MoviesService(_context);
+            var result = movieService.GetMoviesList();
+
+            // 3. Assert
+            Assert.NotEmpty(result);
+        }
+
         private void InitializeDB()
         {
             _context.Database.EnsureCreated();
