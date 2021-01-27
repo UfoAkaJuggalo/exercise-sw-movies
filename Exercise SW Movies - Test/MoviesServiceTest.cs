@@ -28,7 +28,7 @@ namespace Exercise_SW_Movies___Test
         }
 
         [Fact]
-        public async void CheckIfWeHaveAnyFilms()
+        public void CheckIfWeHaveAnyFilms()
         {
             // 1. Arrange
 
@@ -43,6 +43,11 @@ namespace Exercise_SW_Movies___Test
         private void InitializeDB()
         {
             _context.Database.EnsureCreated();
+
+            if (_context.Films.Any())
+            {
+                return;
+            }
 
             var SWApiReader = new SWApiReader();
             var filmsList = new List<Films>();
